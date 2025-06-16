@@ -83,8 +83,8 @@ export default function Gallery() {
               variant={selectedCategory === category.value ? "default" : "outline"}
               className={`px-6 py-3 rounded-full font-medium ${
                 selectedCategory === category.value 
-                  ? "bg-church-navy text-white" 
-                  : "bg-gray-200 text-gray-700 hover:bg-church-gold hover:text-white"
+                  ? "bg-church-dark-green text-white" 
+                  : "bg-gray-200 text-gray-700 hover:bg-church-accent-green hover:text-white"
               }`}
               onClick={() => handleCategoryChange(category.value)}
             >
@@ -97,7 +97,7 @@ export default function Gallery() {
         <div className="text-center mb-8">
           <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-church-gold text-white hover:bg-yellow-600">
+              <Button className="bg-church-accent-green text-white hover:bg-green-600">
                 <Upload className="mr-2" size={16} />
                 사진 업로드
               </Button>
@@ -145,7 +145,7 @@ export default function Gallery() {
                   <Button type="button" variant="outline" onClick={() => setIsUploadDialogOpen(false)}>
                     취소
                   </Button>
-                  <Button type="submit" className="bg-church-navy hover:bg-blue-800">
+                  <Button type="submit" className="bg-church-dark-green hover:bg-green-800">
                     추가
                   </Button>
                 </div>
@@ -157,7 +157,7 @@ export default function Gallery() {
         {/* Photo Grid */}
         {isLoading ? (
           <div className="text-center py-16">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-navy mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-green mx-auto mb-4"></div>
             <p className="text-gray-600">사진을 불러오는 중...</p>
           </div>
         ) : (
@@ -177,7 +177,7 @@ export default function Gallery() {
             ))}
 
             {/* Add Photo Placeholder */}
-            <div className="aspect-square bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 hover:border-church-gold transition-colors cursor-pointer flex items-center justify-center">
+            <div className="aspect-square bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 hover:border-church-accent-green transition-colors cursor-pointer flex items-center justify-center">
               <div className="text-center" onClick={() => setIsUploadDialogOpen(true)}>
                 <Plus className="text-2xl text-gray-400 mb-2 mx-auto" size={32} />
                 <p className="text-gray-500 text-sm">사진 추가</p>
@@ -189,7 +189,7 @@ export default function Gallery() {
         {/* Load More Button */}
         {photos.length > 0 && (
           <div className="text-center mt-12">
-            <Button className="bg-church-navy text-white hover:bg-blue-800">
+            <Button className="bg-church-dark-green text-white hover:bg-green-800">
               더 많은 사진 보기
             </Button>
           </div>

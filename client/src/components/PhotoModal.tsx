@@ -17,7 +17,7 @@ export default function PhotoModal({ isOpen, onClose, imageUrl, imageAlt }: Phot
         <Button
           variant="ghost"
           size="sm"
-          className="absolute top-4 right-4 text-white hover:text-church-gold z-10"
+          className="absolute top-4 right-4 text-white hover:text-church-accent-green z-10"
           onClick={onClose}
         >
           <X size={24} />
