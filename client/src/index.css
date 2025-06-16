@@ -24,10 +24,11 @@
   --ring: hsl(221, 83%, 53%);
   --radius: 0.5rem;
   
-  /* Church specific colors */
-  --church-navy: hsl(224, 76%, 19%);
-  --church-gold: hsl(45, 96%, 47%);
-  --church-blue: hsl(221, 83%, 53%);
+  /* Church specific colors - Yerim Church Green Theme */
+  --church-green: hsl(118, 41%, 45%);
+  --church-dark-green: hsl(118, 41%, 25%);
+  --church-light-green: hsl(118, 41%, 65%);
+  --church-accent-green: hsl(88, 50%, 53%);
   --church-charcoal: hsl(215, 16%, 35%);
 }
 
@@ -64,42 +65,54 @@
   }
 }
 
-.church-navy {
-  color: var(--church-navy);
+.church-green {
+  color: var(--church-green);
 }
 
-.bg-church-navy {
-  background-color: var(--church-navy);
+.bg-church-green {
+  background-color: var(--church-green);
 }
 
-.church-gold {
-  color: var(--church-gold);
+.church-dark-green {
+  color: var(--church-dark-green);
 }
 
-.bg-church-gold {
-  background-color: var(--church-gold);
+.bg-church-dark-green {
+  background-color: var(--church-dark-green);
 }
 
-.church-blue {
-  color: var(--church-blue);
+.church-light-green {
+  color: var(--church-light-green);
 }
 
-.bg-church-blue {
-  background-color: var(--church-blue);
+.bg-church-light-green {
+  background-color: var(--church-light-green);
 }
 
-.border-church-gold {
-  border-color: var(--church-gold);
+.church-accent-green {
+  color: var(--church-accent-green);
 }
 
-.text-church-navy {
-  color: var(--church-navy);
+.bg-church-accent-green {
+  background-color: var(--church-accent-green);
 }
 
-.text-church-gold {
-  color: var(--church-gold);
+.border-church-green {
+  border-color: var(--church-green);
 }
 
-.text-church-blue {
-  color: var(--church-blue);
+.text-church-green {
+  color: var(--church-green);
+}
+
+.text-church-dark-green {
+  color: var(--church-dark-green);
+}
+
+.text-church-light-green {
+  color: var(--church-light-green);
+}
+
+.text-church-accent-green {
+  color: var(--church-accent-green);
 }

@@ -25,11 +25,13 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-church-navy rounded-full flex items-center justify-center">
-              <Church className="text-white text-lg" size={20} />
-            </div>
+            <img 
+              src="/attached_assets/예람교회_로고_1750083020737.png" 
+              alt="예람교회 로고" 
+              className="w-12 h-12 object-contain"
+            />
             <div>
-              <h1 className="text-xl font-bold text-church-navy">예람교회</h1>
+              <h1 className="text-xl font-bold text-church-dark-green">예람교회</h1>
               <p className="text-xs text-gray-500">Yerim Church</p>
             </div>
           </Link>
@@ -42,8 +44,8 @@ export default function Navigation() {
                 href={item.path}
                 className={`font-medium transition-colors ${
                   isActive(item.path)
-                    ? "text-church-navy border-b-2 border-church-gold"
-                    : "text-gray-600 hover:text-church-navy"
+                    ? "text-church-dark-green border-b-2 border-church-accent-green"
+                    : "text-gray-600 hover:text-church-green"
                 }`}
               >
                 {item.label}
@@ -59,9 +61,9 @@ export default function Navigation() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="text-church-navy" size={20} />
+              <X className="text-church-dark-green" size={20} />
             ) : (
-              <Menu className="text-church-navy" size={20} />
+              <Menu className="text-church-dark-green" size={20} />
             )}
           </Button>
         </div>
@@ -76,7 +78,7 @@ export default function Navigation() {
                   href={item.path}
                   className={`block px-3 py-2 rounded ${
                     isActive(item.path)
-                      ? "text-church-navy font-medium bg-blue-50"
+                      ? "text-church-dark-green font-medium bg-green-50"
                       : "text-gray-600 hover:bg-gray-50"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
