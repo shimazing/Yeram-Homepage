@@ -67,7 +67,7 @@ export default function AdminForm({ type, initialData, onSave, onCancel }: Admin
               <Button type="button" variant="outline" onClick={onCancel}>
                 취소
               </Button>
-              <Button type="submit" className="bg-church-navy hover:bg-blue-800">
+              <Button type="submit" className="bg-church-dark-green hover:bg-green-800">
                 저장
               </Button>
             </div>
@@ -139,7 +139,7 @@ export default function AdminForm({ type, initialData, onSave, onCancel }: Admin
               <Button type="button" variant="outline" onClick={onCancel}>
                 취소
               </Button>
-              <Button type="submit" className="bg-church-navy hover:bg-blue-800">
+              <Button type="submit" className="bg-church-dark-green hover:bg-green-800">
                 저장
               </Button>
             </div>
