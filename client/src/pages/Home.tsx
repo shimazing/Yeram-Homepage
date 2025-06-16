@@ -54,24 +54,24 @@ export default function Home() {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <section className="min-h-screen bg-gradient-to-b from-green-50 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-church-navy mb-6 font-serif">
+          <h2 className="text-4xl md:text-5xl font-bold text-church-dark-green mb-6 font-serif">
             하나님의 사랑 안에서<br />
-            <span className="text-church-gold">함께하는 예람교회</span>
+            <span className="text-church-accent-green">함께하는 예람교회</span>
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             "여호와는 나의 목자시니 내게 부족함이 없으리로다" (시편 23:1)<br />
             예람교회에 오신 것을 환영합니다. 하나님의 말씀과 사랑으로 함께 성장해가요.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-church-navy text-white px-8 py-3 hover:bg-blue-800">
+            <Button className="bg-church-green text-white px-8 py-3 hover:bg-church-dark-green">
               <Calendar className="mr-2" size={16} />
               예배 참여하기
             </Button>
-            <Button variant="outline" className="border-church-navy text-church-navy px-8 py-3 hover:bg-church-navy hover:text-white">
+            <Button variant="outline" className="border-church-green text-church-green px-8 py-3 hover:bg-church-green hover:text-white">
               <Phone className="mr-2" size={16} />
               교회 연락처
             </Button>
@@ -81,7 +81,7 @@ export default function Home() {
         {/* Weekly Service Video */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold text-church-navy mb-4">금주의 예배</h3>
+            <h3 className="text-3xl font-bold text-church-dark-green mb-4">금주의 예배</h3>
             <p className="text-gray-600">이번 주 예배 말씀을 함께 나누어요</p>
             <Button
               variant="outline"
@@ -97,7 +97,7 @@ export default function Home() {
               {isLoading ? (
                 <div className="aspect-video bg-gray-100 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-navy mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-green mx-auto mb-4"></div>
                     <p className="text-gray-600">로딩 중...</p>
                   </div>
                 </div>
@@ -114,13 +114,13 @@ export default function Home() {
                     />
                   </div>
                   <CardContent className="p-6">
-                    <h4 className="text-xl font-bold text-church-navy mb-2">
+                    <h4 className="text-xl font-bold text-church-dark-green mb-2">
                       {weeklyService.sermonTitle}
                     </h4>
                     <p className="text-gray-600 mb-4">{weeklyService.scripture}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-500">{weeklyService.date}</span>
-                      <Button className="bg-church-gold text-white hover:bg-yellow-600">
+                      <Button className="bg-church-accent-green text-white hover:bg-green-600">
                         <Play className="mr-2" size={16} />
                         YouTube에서 보기
                       </Button>
@@ -143,10 +143,10 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <Card className="text-center hover:shadow-xl transition-shadow">
             <CardContent className="p-6">
-              <div className="w-16 h-16 bg-church-gold bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="text-church-gold text-2xl" size={32} />
+              <div className="w-16 h-16 bg-church-accent-green bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="text-church-accent-green text-2xl" size={32} />
               </div>
-              <h4 className="text-xl font-bold text-church-navy mb-2">예배시간</h4>
+              <h4 className="text-xl font-bold text-church-dark-green mb-2">예배시간</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
                 주일 11시 / 오후 2시30분<br />
                 수요일 7시30분 / 금요일 9시
@@ -156,10 +156,10 @@ export default function Home() {
 
           <Card className="text-center hover:shadow-xl transition-shadow">
             <CardContent className="p-6">
-              <div className="w-16 h-16 bg-church-blue bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="text-church-blue text-2xl" size={32} />
+              <div className="w-16 h-16 bg-church-green bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="text-church-green text-2xl" size={32} />
               </div>
-              <h4 className="text-xl font-bold text-church-navy mb-2">찾아오시는 길</h4>
+              <h4 className="text-xl font-bold text-church-dark-green mb-2">찾아오시는 길</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
                 서울시 강남구 예람로 123<br />
                 지하철 2호선 예람역 3번 출구
@@ -169,10 +169,10 @@ export default function Home() {
 
           <Card className="text-center hover:shadow-xl transition-shadow">
             <CardContent className="p-6">
-              <div className="w-16 h-16 bg-green-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="text-green-500 text-2xl" size={32} />
+              <div className="w-16 h-16 bg-church-light-green bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="text-church-light-green text-2xl" size={32} />
               </div>
-              <h4 className="text-xl font-bold text-church-navy mb-2">연락처</h4>
+              <h4 className="text-xl font-bold text-church-dark-green mb-2">연락처</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
                 전화: 02-1234-5678<br />
                 이메일: info@yerimchurch.org

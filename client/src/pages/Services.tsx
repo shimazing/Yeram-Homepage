@@ -66,7 +66,7 @@ export default function Services() {
     <section className="min-h-screen bg-white py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-church-navy mb-6 font-serif">예배 안내</h2>
+          <h2 className="text-4xl font-bold text-church-dark-green mb-6 font-serif">예배 안내</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             하나님을 예배하는 거룩한 시간에 함께하세요. 모든 분들을 환영합니다.
           </p>
@@ -79,12 +79,12 @@ export default function Services() {
               <Card key={index} className={`bg-gradient-to-br ${service.gradient} hover:shadow-lg transition-shadow`}>
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-church-navy rounded-full flex items-center justify-center mr-4">
-                      <IconComponent className="text-church-gold" size={24} />
+                    <div className="w-12 h-12 bg-church-dark-green rounded-full flex items-center justify-center mr-4">
+                      <IconComponent className="text-church-accent-green" size={24} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-church-navy">{service.title}</h3>
-                      <p className="text-church-gold font-medium">{service.titleEn}</p>
+                      <h3 className="text-xl font-bold text-church-dark-green">{service.title}</h3>
+                      <p className="text-church-accent-green font-medium">{service.titleEn}</p>
                     </div>
                   </div>
                   <div className="space-y-3">
