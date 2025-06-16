@@ -59,7 +59,7 @@ export default function Announcements() {
     <section className="min-h-screen bg-gray-50 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-church-navy mb-6 font-serif">교회 소식</h2>
+          <h2 className="text-4xl font-bold text-church-dark-green mb-6 font-serif">교회 소식</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             예람교회의 최신 소식과 공지사항을 확인하세요.
           </p>
@@ -68,7 +68,7 @@ export default function Announcements() {
         {/* Admin Edit Button */}
         <div className="mb-8 text-center">
           <Button 
-            className="bg-church-gold text-white hover:bg-yellow-600"
+            className="bg-church-accent-green text-white hover:bg-green-600"
             onClick={() => setIsEditing(true)}
           >
             <Edit className="mr-2" size={16} />
@@ -79,19 +79,19 @@ export default function Announcements() {
         {/* Current Announcement */}
         <div className="max-w-4xl mx-auto mb-12">
           <Card className="shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-church-navy to-church-blue p-6 text-white">
+            <div className="bg-gradient-to-r from-church-dark-green to-church-green p-6 text-white">
               <h3 className="text-2xl font-bold mb-2">주요 공지사항</h3>
-              <p className="text-blue-100">Important Announcement</p>
+              <p className="text-green-100">Important Announcement</p>
             </div>
             <CardContent className="p-8">
               {isLoading ? (
                 <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-navy mx-auto mb-4"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-green mx-auto mb-4"></div>
                   <p className="text-gray-600">로딩 중...</p>
                 </div>
               ) : announcement ? (
                 <>
-                  <h4 className="text-xl font-bold text-church-navy mb-4">
+                  <h4 className="text-xl font-bold text-church-dark-green mb-4">
                     {announcement.title}
                   </h4>
                   <div className="prose max-w-none text-gray-600 mb-6">
@@ -102,7 +102,7 @@ export default function Announcements() {
                       <Clock className="mr-2" size={16} />
                       {new Date(announcement.createdAt).toLocaleDateString('ko-KR')} 게시
                     </div>
-                    <div className="flex items-center text-sm text-church-navy font-medium">
+                    <div className="flex items-center text-sm text-church-dark-green font-medium">
                       <User className="mr-2" size={16} />
                       {announcement.author}
                     </div>
@@ -126,12 +126,12 @@ export default function Announcements() {
               className="w-full h-48 object-cover"
             />
             <CardContent className="p-6">
-              <h4 className="text-lg font-bold text-church-navy mb-2">청년부 겨울수련회</h4>
+              <h4 className="text-lg font-bold text-church-dark-green mb-2">청년부 겨울수련회</h4>
               <p className="text-gray-600 text-sm mb-4">
                 강원도 평창에서 진행되는 2박 3일 청년부 겨울수련회에 많은 참여 부탁드립니다.
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-church-gold font-medium">2024.01.26-28</span>
+                <span className="text-sm text-church-accent-green font-medium">2024.01.26-28</span>
                 <span className="text-xs text-gray-500">청년부</span>
               </div>
             </CardContent>
@@ -144,12 +144,12 @@ export default function Announcements() {
               className="w-full h-48 object-cover"
             />
             <CardContent className="p-6">
-              <h4 className="text-lg font-bold text-church-navy mb-2">사랑의 떡나눔</h4>
+              <h4 className="text-lg font-bold text-church-dark-green mb-2">사랑의 떡나눔</h4>
               <p className="text-gray-600 text-sm mb-4">
                 매달 셋째 주 주일, 예배 후 모든 성도님들과 함께하는 사랑의 식사시간입니다.
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-church-gold font-medium">매월 셋째주</span>
+                <span className="text-sm text-church-accent-green font-medium">매월 셋째주</span>
                 <span className="text-xs text-gray-500">전체</span>
               </div>
             </CardContent>
@@ -162,12 +162,12 @@ export default function Announcements() {
               className="w-full h-48 object-cover"
             />
             <CardContent className="p-6">
-              <h4 className="text-lg font-bold text-church-navy mb-2">어린이 성경학교</h4>
+              <h4 className="text-lg font-bold text-church-dark-green mb-2">어린이 성경학교</h4>
               <p className="text-gray-600 text-sm mb-4">
                 여름방학을 맞아 어린이들을 위한 특별한 성경학교가 열립니다. 많은 참여 부탁드립니다.
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-church-gold font-medium">2024.07.22-26</span>
+                <span className="text-sm text-church-accent-green font-medium">2024.07.22-26</span>
                 <span className="text-xs text-gray-500">어린이부</span>
               </div>
             </CardContent>

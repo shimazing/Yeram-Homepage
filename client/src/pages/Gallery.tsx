@@ -69,7 +69,7 @@ export default function Gallery() {
     <section className="min-h-screen bg-white py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-church-navy mb-6 font-serif">사진첩</h2>
+          <h2 className="text-4xl font-bold text-church-dark-green mb-6 font-serif">사진첩</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             예람교회의 소중한 순간들을 함께 나누어요.
           </p>

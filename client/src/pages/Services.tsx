@@ -109,12 +109,12 @@ export default function Services() {
           <Card className="bg-gradient-to-br from-gray-50 to-gray-100 hover:shadow-lg transition-shadow">
             <CardContent className="p-8">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-church-navy rounded-full flex items-center justify-center mr-4">
-                  <Info className="text-church-gold" size={24} />
+                <div className="w-12 h-12 bg-church-dark-green rounded-full flex items-center justify-center mr-4">
+                  <Info className="text-church-accent-green" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-church-navy">예배 안내사항</h3>
-                  <p className="text-church-gold font-medium">Service Guidelines</p>
+                  <h3 className="text-xl font-bold text-church-dark-green">예배 안내사항</h3>
+                  <p className="text-church-accent-green font-medium">Service Guidelines</p>
                 </div>
               </div>
               <div className="space-y-3 text-sm">
