@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Church, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@assets/logo.jpeg";
 
 export default function Navigation() {
   const [location] = useLocation();
@@ -10,6 +11,7 @@ export default function Navigation() {
   const navItems = [
     { path: "/", label: "홈", labelEn: "Home" },
     { path: "/services", label: "예배안내", labelEn: "Services" },
+    { path: "/watch-services", label: "예배 다시보기", labelEn: "Watch" },
     { path: "/announcements", label: "교회소식", labelEn: "News" },
     { path: "/gallery", label: "사진첩", labelEn: "Gallery" },
   ];
@@ -26,7 +28,7 @@ export default function Navigation() {
           {/* Logo Section */}
           <Link href="/" className="flex items-center space-x-3">
             <img 
-              src="/attached_assets/예람교회_로고_1750083020737.png" 
+              src={logo} 
               alt="예람교회 로고" 
               className="w-12 h-12 object-contain"
             />

@@ -4,11 +4,21 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function Services() {
   const services = [
     {
+      title: "새벽예배",
+      titleEn: "Early Morning Service",
+      time: "월~금 새벽 5:30",
+      audience: "전 연령 대상",
+      description: "하루를 하나님과 함께 시작하는 은혜로운 시간입니다. 새벽의 고요함 속에서 말씀과 기도로 영적 힘을 얻으세요.",
+      icon: Star,
+      gradient: "from-sky-50 to-sky-100",
+      iconColor: "text-sky-600",
+    },
+    {
       title: "주일 낮예배",
       titleEn: "Sunday Morning",
       time: "오전 11:00",
       audience: "전 연령 대상",
-      description: "주일 대예배로 온 교회가 함께 모여 하나님을 찬양하고 말씀을 듣는 시간입니다.",
+      description: "주일 대예배로 함께 모여 하나님을 찬양하고 말씀을 듣는 시간입니다.",
       icon: Sun,
       gradient: "from-blue-50 to-blue-100",
       iconColor: "text-church-blue",
@@ -18,17 +28,17 @@ export default function Services() {
       titleEn: "Sunday Afternoon",
       time: "오후 2:30",
       audience: "전 연령 대상",
-      description: "오후에 드리는 예배로 더욱 깊은 교제와 나눔의 시간을 갖습니다.",
+      description: "성도의 영적 성장을 위한 교육을 진행합니다.",
       icon: Sun,
       gradient: "from-orange-50 to-orange-100",
       iconColor: "text-orange-600",
     },
     {
-      title: "학생부/어린이예배",
+      title: "학생 예배",
       titleEn: "Student & Children",
       time: "오전 9:00",
-      audience: "유치부~고등부",
-      description: "연령에 맞는 예배와 말씀으로 어린이와 청소년들이 신앙을 기를 수 있도록 돕습니다.",
+      audience: "유치부~초등부",
+      description: "아이들이 신앙을 기를 수 있도록 말씀과 놀이 활동을 통해 교육합니다",
       icon: Users,
       gradient: "from-green-50 to-green-100",
       iconColor: "text-green-600",
@@ -44,11 +54,11 @@ export default function Services() {
       iconColor: "text-purple-600",
     },
     {
-      title: "금요예배",
+      title: "금요기도회",
       titleEn: "Friday Service",
       time: "저녁 9:00",
-      audience: "청년부 중심",
-      description: "청년들을 위한 특별한 시간으로 찬양과 교제를 통해 하나님과 더 가까워집니다.",
+      audience: "전 연령 대상",
+      description: "말씀과 깊은 기도의 시간을 통해 하나님과 더 가까워집니다.",
       icon: Star,
       gradient: "from-indigo-50 to-indigo-100",
       iconColor: "text-indigo-600",
@@ -106,7 +116,7 @@ export default function Services() {
           })}
 
           {/* Service Guidelines */}
-          <Card className="bg-gradient-to-br from-gray-50 to-gray-100 hover:shadow-lg transition-shadow">
+          {/* <Card className="bg-gradient-to-br from-gray-50 to-gray-100 hover:shadow-lg transition-shadow">
             <CardContent className="p-8">
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-church-dark-green rounded-full flex items-center justify-center mr-4">
@@ -126,7 +136,7 @@ export default function Services() {
                 ))}
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </section>

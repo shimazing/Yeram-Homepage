@@ -1,4 +1,5 @@
 import { Church, MapPin, Phone, Mail, Train } from "lucide-react";
+import logo from "@assets/logo.jpeg";
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="/attached_assets/예람교회_로고_1750083020737.png" 
+                src={logo} 
                 alt="예람교회 로고" 
                 className="w-12 h-12 object-contain bg-white rounded-full p-2"
               />
@@ -32,19 +33,19 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <MapPin className="text-church-accent-green" size={16} />
-                <span className="text-green-200">서울시 강남구 예람로 123</span>
+                <span className="text-green-200">인천 계양구 경명대로 1116 3층</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="text-church-accent-green" size={16} />
-                <span className="text-green-200">02-1234-5678</span>
+                <span className="text-green-200">010-2653-2440 (담임목사 강용희)</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="text-church-accent-green" size={16} />
-                <span className="text-green-200">info@yerimchurch.org</span>
+                <span className="text-green-200">yerammethodistchurch@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Train className="text-church-accent-green" size={16} />
-                <span className="text-green-200">지하철 2호선 예람역 3번 출구</span>
+                <span className="text-green-200">지하철 인천1호선 계산역 1번 출구</span>
               </div>
             </div>
           </div>
@@ -54,24 +55,28 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-6">예배시간</h4>
             <div className="space-y-3">
               <div className="flex justify-between">
+                <span className="text-church-accent-green font-medium">새벽예배</span>
+                <span className="text-green-200">월~금 05:30</span>
+              </div>
+              <div className="flex justify-between">
                 <span className="text-church-accent-green font-medium">주일 낮예배</span>
-                <span className="text-green-200">11:00</span>
+                <span className="text-green-200">주일 11:00</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-church-accent-green font-medium">주일 오후예배</span>
-                <span className="text-green-200">14:30</span>
+                <span className="text-green-200">주일 14:30</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-church-accent-green font-medium">학생부/어린이</span>
-                <span className="text-green-200">09:00</span>
+                <span className="text-green-200">주일 09:00</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-church-accent-green font-medium">수요예배</span>
-                <span className="text-green-200">19:30</span>
+                <span className="text-green-200">수요일 19:30</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-church-accent-green font-medium">금요예배</span>
-                <span className="text-green-200">21:00</span>
+                <span className="text-green-200">금요일 21:00</span>
               </div>
             </div>
           </div>
@@ -81,6 +86,9 @@ export default function Footer() {
           <p className="text-green-200 text-sm">
             © 2024 예람교회 (Yerim Church). All rights reserved.
           </p>
+          <a href="/admin" className="text-green-300 hover:text-white text-xs mt-2 inline-block opacity-50 hover:opacity-100 transition-opacity">
+            관리자
+          </a>
         </div>
       </div>
     </footer>

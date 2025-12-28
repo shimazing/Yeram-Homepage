@@ -1,57 +1,47 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import { Calendar, Phone, MapPin, Clock, Users, Play } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Phone, MapPin, Clock, Users, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import AdminForm from "@/components/AdminForm";
 import type { WeeklyService } from "@shared/schema";
 
 export default function Home() {
-  const [isEditingService, setIsEditingService] = useState(false);
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-
   const { data: weeklyService, isLoading } = useQuery<WeeklyService>({
     queryKey: ["/api/weekly-service"],
   });
 
-  const updateServiceMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const response = await apiRequest("PUT", "/api/weekly-service", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/weekly-service"] });
-      toast({ title: "예배 정보가 업데이트되었습니다." });
-      setIsEditingService(false);
-    },
-    onError: () => {
-      toast({ title: "업데이트에 실패했습니다.", variant: "destructive" });
-    },
-  });
+  const extractVideoId = (url: string) => {
+    // Handle various YouTube URL formats:
+    // - https://www.youtube.com/watch?v=VIDEO_ID
+    // - https://www.youtube.com/live/VIDEO_ID
+    // - https://www.youtube.com/embed/VIDEO_ID
+    // - https://youtu.be/VIDEO_ID
+    // - https://www.youtube.com/v/VIDEO_ID
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=)([^&\s]+)/,           // watch?v=
+      /(?:youtube\.com\/live\/)([^?\s]+)/,              // live/
+      /(?:youtube\.com\/embed\/)([^?\s]+)/,             // embed/
+      /(?:youtu\.be\/)([^?\s]+)/,                       // youtu.be/
+      /(?:youtube\.com\/v\/)([^?\s]+)/,                 // v/
+    ];
 
-  const getYouTubeEmbedUrl = (url: string) => {
-    if (url.includes('embed/')) return url;
-    const videoId = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-    return videoId ? `https://www.youtube.com/embed/${videoId[1]}` : url;
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+    return null;
   };
 
-  if (isEditingService) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <AdminForm
-            type="service"
-            initialData={weeklyService}
-            onSave={(data) => updateServiceMutation.mutate(data)}
-            onCancel={() => setIsEditingService(false)}
-          />
-        </div>
-      </div>
-    );
-  }
+  const getYouTubeEmbedUrl = (url: string) => {
+    const videoId = extractVideoId(url);
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+  };
+
+  const getYouTubeWatchUrl = (url: string) => {
+    const videoId = extractVideoId(url);
+    return videoId ? `https://www.youtube.com/watch?v=${videoId}` : url;
+  };
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-green-50 to-white">
@@ -59,23 +49,13 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-church-dark-green mb-6 font-serif">
-            하나님의 사랑 안에서<br />
+            하나님 사랑 안에서<br />
             <span className="text-church-accent-green">함께하는 예람교회</span>
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             "여호와는 나의 목자시니 내게 부족함이 없으리로다" (시편 23:1)<br />
             예람교회에 오신 것을 환영합니다. 하나님의 말씀과 사랑으로 함께 성장해가요.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-church-green text-white px-8 py-3 hover:bg-church-dark-green">
-              <Calendar className="mr-2" size={16} />
-              예배 참여하기
-            </Button>
-            <Button variant="outline" className="border-church-green text-church-green px-8 py-3 hover:bg-church-green hover:text-white">
-              <Phone className="mr-2" size={16} />
-              교회 연락처
-            </Button>
-          </div>
         </div>
 
         {/* Weekly Service Video */}
@@ -83,13 +63,6 @@ export default function Home() {
           <div className="text-center mb-8">
             <h3 className="text-3xl font-bold text-church-dark-green mb-4">금주의 예배</h3>
             <p className="text-gray-600">이번 주 예배 말씀을 함께 나누어요</p>
-            <Button
-              variant="outline"
-              className="mt-4"
-              onClick={() => setIsEditingService(true)}
-            >
-              예배 정보 수정
-            </Button>
           </div>
 
           <div className="max-w-4xl mx-auto">
@@ -120,9 +93,18 @@ export default function Home() {
                     <p className="text-gray-600 mb-4">{weeklyService.scripture}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-500">{weeklyService.date}</span>
-                      <Button className="bg-church-accent-green text-white hover:bg-green-600">
-                        <Play className="mr-2" size={16} />
-                        YouTube에서 보기
+                      <Button
+                        className="bg-church-accent-green text-white hover:bg-green-600"
+                        asChild
+                      >
+                        <a
+                          href={getYouTubeWatchUrl(weeklyService.youtubeUrl)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Play className="mr-2" size={16} />
+                          YouTube에서 보기
+                        </a>
                       </Button>
                     </div>
                   </CardContent>
@@ -161,9 +143,17 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold text-church-dark-green mb-2">찾아오시는 길</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
-                서울시 강남구 예람로 123<br />
-                지하철 2호선 예람역 3번 출구
+                예람교회<br />
+                인천 계양구 경명대로 1116 하나상가 3층
               </p>
+              <a
+                href="https://naver.me/xLsA42hQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-3 text-church-green hover:text-church-dark-green underline text-sm"
+              >
+                네이버 지도 보기
+              </a>
             </CardContent>
           </Card>
 
@@ -174,8 +164,8 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold text-church-dark-green mb-2">연락처</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
-                전화: 02-1234-5678<br />
-                이메일: info@yerimchurch.org
+                전화: 010-2653-2440 (담임목사 강용희) <br />
+                이메일: yerammethodistchurch@gmail.com
               </p>
             </CardContent>
           </Card>

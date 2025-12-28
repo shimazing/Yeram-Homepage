@@ -12,8 +12,11 @@ export default function PhotoModal({ isOpen, onClose, imageUrl, imageAlt }: Phot
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-      <div className="relative max-w-4xl max-h-full">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div className="relative max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
         <Button
           variant="ghost"
           size="sm"
@@ -22,11 +25,18 @@ export default function PhotoModal({ isOpen, onClose, imageUrl, imageAlt }: Phot
         >
           <X size={24} />
         </Button>
-        <img
-          src={imageUrl}
-          alt={imageAlt}
-          className="max-w-full max-h-full object-contain"
-        />
+        <div className="bg-white rounded-lg overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            className="w-full max-h-[70vh] object-contain bg-gray-100"
+          />
+          {imageAlt && (
+            <div className="p-6 bg-white">
+              <p className="text-gray-800 text-center text-lg">{imageAlt}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

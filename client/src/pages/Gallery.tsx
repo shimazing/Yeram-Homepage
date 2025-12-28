@@ -1,68 +1,37 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Upload, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
 import PhotoModal from "@/components/PhotoModal";
 import type { GalleryPhoto } from "@shared/schema";
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<{ url: string; alt: string } | null>(null);
-  const [uploadForm, setUploadForm] = useState({
-    url: '',
-    alt: '',
-    category: 'worship'
-  });
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
+  const [displayLimit, setDisplayLimit] = useState(12); // 처음에 12개만 표시
 
   const { data: photos = [], isLoading } = useQuery<GalleryPhoto[]>({
-    queryKey: ["/api/gallery", selectedCategory],
+    queryKey: [`/api/gallery?category=${selectedCategory}`],
   });
 
-  const addPhotoMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const response = await apiRequest("POST", "/api/gallery", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/gallery"] });
-      toast({ title: "사진이 추가되었습니다." });
-      setIsUploadDialogOpen(false);
-      setUploadForm({ url: '', alt: '', category: 'worship' });
-    },
-    onError: () => {
-      toast({ title: "사진 추가에 실패했습니다.", variant: "destructive" });
-    },
-  });
+  // 표시할 사진 목록 (제한된 개수만)
+  const displayedPhotos = photos.slice(0, displayLimit);
+  const hasMore = photos.length > displayLimit;
 
   const categories = [
     { value: 'all', label: '전체' },
-    { value: 'worship', label: '예배' },
-    { value: 'events', label: '행사' },
-    { value: 'fellowship', label: '교제' },
+    { value: 'worship', label: '주일예배' },
+    { value: 'fellowship', label: '친교활동' },
     { value: 'youth', label: '청년부' },
+    { value: 'events', label: '특별행사' },
   ];
-
-  const handleUpload = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!uploadForm.url || !uploadForm.alt) {
-      toast({ title: "모든 필드를 입력해주세요.", variant: "destructive" });
-      return;
-    }
-    addPhotoMutation.mutate(uploadForm);
-  };
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
+    setDisplayLimit(12); // 카테고리 변경 시 limit 초기화
+  };
+
+  const loadMore = () => {
+    setDisplayLimit(prev => prev + 12); // 12개씩 추가로 로드
   };
 
   return (
@@ -82,8 +51,8 @@ export default function Gallery() {
               key={category.value}
               variant={selectedCategory === category.value ? "default" : "outline"}
               className={`px-6 py-3 rounded-full font-medium ${
-                selectedCategory === category.value 
-                  ? "bg-church-dark-green text-white" 
+                selectedCategory === category.value
+                  ? "bg-church-dark-green text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-church-accent-green hover:text-white"
               }`}
               onClick={() => handleCategoryChange(category.value)}
@@ -93,106 +62,54 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Upload Button */}
-        <div className="text-center mb-8">
-          <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
-            <DialogTrigger asChild>
-              <Button className="bg-church-accent-green text-white hover:bg-green-600">
-                <Upload className="mr-2" size={16} />
-                사진 업로드
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>새 사진 추가</DialogTitle>
-              </DialogHeader>
-              <form onSubmit={handleUpload} className="space-y-4">
-                <div>
-                  <Label htmlFor="url">이미지 URL</Label>
-                  <Input
-                    id="url"
-                    value={uploadForm.url}
-                    onChange={(e) => setUploadForm({ ...uploadForm, url: e.target.value })}
-                    placeholder="이미지 URL을 입력하세요"
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="alt">사진 설명</Label>
-                  <Input
-                    id="alt"
-                    value={uploadForm.alt}
-                    onChange={(e) => setUploadForm({ ...uploadForm, alt: e.target.value })}
-                    placeholder="사진 설명을 입력하세요"
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="category">카테고리</Label>
-                  <Select value={uploadForm.category} onValueChange={(value) => setUploadForm({ ...uploadForm, category: value })}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="worship">예배</SelectItem>
-                      <SelectItem value="events">행사</SelectItem>
-                      <SelectItem value="fellowship">교제</SelectItem>
-                      <SelectItem value="youth">청년부</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex justify-end space-x-4">
-                  <Button type="button" variant="outline" onClick={() => setIsUploadDialogOpen(false)}>
-                    취소
-                  </Button>
-                  <Button type="submit" className="bg-church-dark-green hover:bg-green-800">
-                    추가
-                  </Button>
-                </div>
-              </form>
-            </DialogContent>
-          </Dialog>
-        </div>
-
         {/* Photo Grid */}
         {isLoading ? (
           <div className="text-center py-16">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-green mx-auto mb-4"></div>
             <p className="text-gray-600">사진을 불러오는 중...</p>
           </div>
+        ) : photos.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-600">아직 사진이 없습니다.</p>
+          </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {photos.map((photo) => (
-              <div
-                key={photo.id}
-                className="aspect-square bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                onClick={() => setSelectedPhoto({ url: photo.url, alt: photo.alt })}
-              >
-                <img
-                  src={photo.url}
-                  alt={photo.alt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-
-            {/* Add Photo Placeholder */}
-            <div className="aspect-square bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 hover:border-church-accent-green transition-colors cursor-pointer flex items-center justify-center">
-              <div className="text-center" onClick={() => setIsUploadDialogOpen(true)}>
-                <Plus className="text-2xl text-gray-400 mb-2 mx-auto" size={32} />
-                <p className="text-gray-500 text-sm">사진 추가</p>
-              </div>
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {displayedPhotos.map((photo) => (
+                <div
+                  key={photo.id}
+                  className="aspect-square bg-gray-100 rounded-lg overflow-hidden hover:shadow-xl transition-all cursor-pointer group relative"
+                  onClick={() => setSelectedPhoto({ url: photo.url, alt: photo.alt })}
+                >
+                  <img
+                    src={photo.url}
+                    alt={photo.alt}
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                  />
+                  {/* 마우스오버 시 설명 표시 */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <p className="text-white text-sm line-clamp-2">
+                        {photo.alt}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        )}
 
-        {/* Load More Button */}
-        {photos.length > 0 && (
-          <div className="text-center mt-12">
-            <Button className="bg-church-dark-green text-white hover:bg-green-800">
-              더 많은 사진 보기
-            </Button>
-          </div>
+            {/* Load More Button - 더 보여줄 사진이 있을 때만 표시 */}
+            {hasMore && (
+              <div className="text-center mt-12">
+                <Button
+                  onClick={loadMore}
+                  className="bg-church-dark-green text-white hover:bg-green-800"
+                >
+                  더 많은 사진 보기 ({displayedPhotos.length} / {photos.length})
+                </Button>
+              </div>
+            )}
+          </>
         )}
 
         {/* Photo Modal */}

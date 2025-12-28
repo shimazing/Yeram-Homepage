@@ -1,36 +1,22 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import { Edit, Clock, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { Clock, User, Bell } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import AdminForm from "@/components/AdminForm";
 import type { Announcement } from "@shared/schema";
 
 export default function Announcements() {
-  const [isEditing, setIsEditing] = useState(false);
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
+  const [selectedAnnouncement, setSelectedAnnouncement] = useState<Announcement | null>(null);
 
-  const { data: announcement, isLoading } = useQuery<Announcement>({
-    queryKey: ["/api/announcements/current"],
+  const { data: announcements = [], isLoading } = useQuery<Announcement[]>({
+    queryKey: ["/api/announcements"],
   });
 
-  const updateAnnouncementMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const response = await apiRequest("PUT", "/api/announcements", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/announcements/current"] });
-      toast({ title: "공지사항이 업데이트되었습니다." });
-      setIsEditing(false);
-    },
-    onError: () => {
-      toast({ title: "업데이트에 실패했습니다.", variant: "destructive" });
-    },
-  });
+  // 자동으로 최신 공지사항 선택
+  useEffect(() => {
+    if (announcements.length > 0 && !selectedAnnouncement) {
+      setSelectedAnnouncement(announcements[0]);
+    }
+  }, [announcements, selectedAnnouncement]);
 
   const formatContent = (content: string) => {
     return content.split('\n').map((line, index) => (
@@ -39,21 +25,6 @@ export default function Announcements() {
       </p>
     ));
   };
-
-  if (isEditing) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <AdminForm
-            type="announcement"
-            initialData={announcement}
-            onSave={(data) => updateAnnouncementMutation.mutate(data)}
-            onCancel={() => setIsEditing(false)}
-          />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <section className="min-h-screen bg-gray-50 py-16">
@@ -65,114 +36,81 @@ export default function Announcements() {
           </p>
         </div>
 
-        {/* Admin Edit Button */}
-        <div className="mb-8 text-center">
-          <Button 
-            className="bg-church-accent-green text-white hover:bg-green-600"
-            onClick={() => setIsEditing(true)}
-          >
-            <Edit className="mr-2" size={16} />
-            공지사항 수정
-          </Button>
-        </div>
+        {isLoading ? (
+          <div className="text-center py-16">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-green mx-auto mb-4"></div>
+            <p className="text-gray-600">공지사항을 불러오는 중...</p>
+          </div>
+        ) : announcements.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-600">아직 공지사항이 없습니다.</p>
+          </div>
+        ) : (
+          <>
+            {/* 선택된 공지사항 */}
+            {selectedAnnouncement && (
+              <div className="mb-12">
+                <Card className="overflow-hidden shadow-lg">
+                  <CardContent className="p-0 px-6 pt-6 pb-6">
+                    <h4 className="text-2xl font-bold text-church-dark-green mb-4">
+                      {selectedAnnouncement.title}
+                    </h4>
+                    <div className="prose max-w-none text-gray-600 mb-6">
+                      {formatContent(selectedAnnouncement.content)}
+                    </div>
+                    <div className="flex justify-between items-center pt-4 border-t">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Clock className="mr-2" size={16} />
+                        {new Date(selectedAnnouncement.createdAt).toLocaleDateString('ko-KR')} 게시
+                      </div>
+                      <div className="flex items-center text-sm text-church-dark-green font-medium">
+                        <User className="mr-2" size={16} />
+                        {selectedAnnouncement.author}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
 
-        {/* Current Announcement */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <Card className="shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-church-dark-green to-church-green p-6 text-white">
-              <h3 className="text-2xl font-bold mb-2">주요 공지사항</h3>
-              <p className="text-green-100">Important Announcement</p>
+            {/* 공지사항 목록 */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {announcements.map((announcement) => (
+                <Card
+                  key={announcement.id}
+                  className={`cursor-pointer hover:shadow-xl transition-shadow ${
+                    selectedAnnouncement?.id === announcement.id ? 'ring-2 ring-church-accent-green' : ''
+                  }`}
+                  onClick={() => setSelectedAnnouncement(announcement)}
+                >
+                  <CardContent className="p-5">
+                    {/* 제목 - 제일 위 */}
+                    <h4 className="font-bold text-church-dark-green mb-3 line-clamp-2 text-lg">
+                      {announcement.title}
+                    </h4>
+
+                    {/* 내용 미리보기 */}
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      {announcement.content}
+                    </p>
+
+                    {/* 하단: 날짜(왼쪽) + 작성자(오른쪽) */}
+                    <div className="flex justify-between items-end pt-3 border-t border-gray-100">
+                      <div className="flex items-center text-xs text-gray-500">
+                        <Clock className="mr-1" size={12} />
+                        {new Date(announcement.createdAt).toLocaleDateString('ko-KR')}
+                      </div>
+                      <div className="flex items-center text-xs text-church-dark-green font-medium">
+                        <User className="mr-1" size={12} />
+                        {announcement.author}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-            <CardContent className="p-8">
-              {isLoading ? (
-                <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-church-green mx-auto mb-4"></div>
-                  <p className="text-gray-600">로딩 중...</p>
-                </div>
-              ) : announcement ? (
-                <>
-                  <h4 className="text-xl font-bold text-church-dark-green mb-4">
-                    {announcement.title}
-                  </h4>
-                  <div className="prose max-w-none text-gray-600 mb-6">
-                    {formatContent(announcement.content)}
-                  </div>
-                  <div className="flex justify-between items-center pt-4 border-t">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Clock className="mr-2" size={16} />
-                      {new Date(announcement.createdAt).toLocaleDateString('ko-KR')} 게시
-                    </div>
-                    <div className="flex items-center text-sm text-church-dark-green font-medium">
-                      <User className="mr-2" size={16} />
-                      {announcement.author}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-gray-600">현재 공지사항이 없습니다.</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Recent Events Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-              alt="Church evening service" 
-              className="w-full h-48 object-cover"
-            />
-            <CardContent className="p-6">
-              <h4 className="text-lg font-bold text-church-dark-green mb-2">청년부 겨울수련회</h4>
-              <p className="text-gray-600 text-sm mb-4">
-                강원도 평창에서 진행되는 2박 3일 청년부 겨울수련회에 많은 참여 부탁드립니다.
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-church-accent-green font-medium">2024.01.26-28</span>
-                <span className="text-xs text-gray-500">청년부</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <img 
-              src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-              alt="Church fellowship meal" 
-              className="w-full h-48 object-cover"
-            />
-            <CardContent className="p-6">
-              <h4 className="text-lg font-bold text-church-dark-green mb-2">사랑의 떡나눔</h4>
-              <p className="text-gray-600 text-sm mb-4">
-                매달 셋째 주 주일, 예배 후 모든 성도님들과 함께하는 사랑의 식사시간입니다.
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-church-accent-green font-medium">매월 셋째주</span>
-                <span className="text-xs text-gray-500">전체</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <img 
-              src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-              alt="Children Sunday school activity" 
-              className="w-full h-48 object-cover"
-            />
-            <CardContent className="p-6">
-              <h4 className="text-lg font-bold text-church-dark-green mb-2">어린이 성경학교</h4>
-              <p className="text-gray-600 text-sm mb-4">
-                여름방학을 맞아 어린이들을 위한 특별한 성경학교가 열립니다. 많은 참여 부탁드립니다.
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-church-accent-green font-medium">2024.07.22-26</span>
-                <span className="text-xs text-gray-500">어린이부</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          </>
+        )}
       </div>
     </section>
   );
