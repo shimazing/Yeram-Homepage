@@ -258,7 +258,10 @@ export class FileStorage implements IStorage {
   };
 
   constructor(dataFile: string = 'data.json') {
-    this.dataFile = path.join(process.cwd(), dataFile);
+    // Use absolute path if provided, otherwise join with cwd
+    this.dataFile = path.isAbsolute(dataFile)
+      ? dataFile
+      : path.join(process.cwd(), dataFile);
     console.log('📁 FileStorage initialized. Data file path:', this.dataFile);
     this.data = this.loadData();
   }
