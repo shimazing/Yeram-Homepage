@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yeramchurch.com/</loc>
+    <loc>https://www.yeram.me.kr/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yeramchurch.com/services</loc>
+    <loc>https://www.yeram.me.kr/services</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yeramchurch.com/announcements</loc>
+    <loc>https://www.yeram.me.kr/announcements</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yeramchurch.com/gallery</loc>
+    <loc>https://www.yeram.me.kr/gallery</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yeramchurch.com/watch-services</loc>
+    <loc>https://www.yeram.me.kr/watch-services</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

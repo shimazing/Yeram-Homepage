@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yeramchurch.com/sitemap.xml
+Sitemap: https://www.yeram.me.kr/sitemap.xml
