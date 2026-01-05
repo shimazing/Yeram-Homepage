@@ -9,7 +9,7 @@ interface AdminContextType {
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 // 관리자 비밀번호 (실제 운영시에는 환경변수로 관리하는 것이 좋습니다)
-const ADMIN_PASSWORD = 'yeram2024';
+const ADMIN_PASSWORD = 'yeram2025';
 
 export function AdminProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);

@@ -84,7 +84,7 @@ export default function Footer() {
 
         <div className="border-t border-green-700 mt-12 pt-8 text-center">
           <p className="text-green-200 text-sm">
-            © 2024 예람교회 (Yeram Church). All rights reserved.
+            © 2025 예람교회 (Yeram Church). All rights reserved.
           </p>
           <a href="/admin" className="text-green-300 hover:text-white text-xs mt-2 inline-block opacity-50 hover:opacity-100 transition-opacity">
             관리자

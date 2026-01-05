@@ -131,7 +131,7 @@ export default function AdminForm({ type, initialData, onSave, onCancel }: Admin
                 id="date"
                 value={formData.date || ''}
                 onChange={(e) => handleInputChange('date', e.target.value)}
-                placeholder="날짜를 입력하세요 (예: 2024.01.14)"
+                placeholder="날짜를 입력하세요 (예: 2025.01.14)"
                 required
               />
             </div>

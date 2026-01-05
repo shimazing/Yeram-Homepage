@@ -214,7 +214,7 @@ function AnnouncementsEditor() {
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="예: 2024년 새해 인사"
+              placeholder="예: 2025년 새해 인사"
             />
           </div>
           <div>
@@ -676,12 +676,12 @@ function WeeklyServiceEditor() {
         <CardContent className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              제목 (예: 2024년 1월 첫째 주)
+              제목 (예: 2025년 1월 첫째 주)
             </label>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="2024년 1월 첫째 주"
+              placeholder="2025년 1월 첫째 주"
             />
           </div>
           <div>
@@ -721,7 +721,7 @@ function WeeklyServiceEditor() {
             <Input
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              placeholder="2024년 1월 7일"
+              placeholder="2025년 1월 7일"
             />
           </div>
           <div className="flex gap-2">

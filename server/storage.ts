@@ -58,10 +58,10 @@ export class MemStorage implements IStorage {
     // Initialize with current announcement
     const initialAnnouncement: Announcement = {
       id: this.currentId++,
-      title: "2024년 신년 특별새벽기도회 안내",
+      title: "2025년 신년 특별새벽기도회 안내",
       content: `사랑하는 예람교회 성도 여러분, 새해를 맞아 특별새벽기도회를 개최합니다.
 
-• 기간: 2024년 1월 15일(월) ~ 1월 19일(금)
+• 기간: 2025년 1월 15일(월) ~ 1월 19일(금)
 • 시간: 매일 새벽 5:30 ~ 6:30
 • 장소: 본당
 • 주제: "새해, 새로운 비전"
@@ -75,11 +75,11 @@ export class MemStorage implements IStorage {
     // Initialize with current weekly service
     const initialService: WeeklyService = {
       id: this.currentId++,
-      title: "2024년 1월 둘째 주 주일예배",
+      title: "2025년 1월 둘째 주 주일예배",
       sermonTitle: "새해, 새로운 시작",
       scripture: "마태복음 5:13-16",
       youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      date: "2024.01.14",
+      date: "2025.01.14",
       createdAt: new Date(),
     };
     this.weeklyServices.set(initialService.id, initialService);
@@ -303,10 +303,10 @@ export class FileStorage implements IStorage {
 
     const initialAnnouncement: Announcement = {
       id: currentId.value++,
-      title: "2024년 신년 특별새벽기도회 안내",
+      title: "2025년 신년 특별새벽기도회 안내",
       content: `사랑하는 예람교회 성도 여러분, 새해를 맞아 특별새벽기도회를 개최합니다.
 
-• 기간: 2024년 1월 15일(월) ~ 1월 19일(금)
+• 기간: 2025년 1월 15일(월) ~ 1월 19일(금)
 • 시간: 매일 새벽 5:30 ~ 6:30
 • 장소: 본당
 • 주제: "새해, 새로운 비전"
@@ -318,11 +318,11 @@ export class FileStorage implements IStorage {
 
     const initialService: WeeklyService = {
       id: currentId.value++,
-      title: "2024년 1월 둘째 주 주일예배",
+      title: "2025년 1월 둘째 주 주일예배",
       sermonTitle: "새해, 새로운 시작",
       scripture: "마태복음 5:13-16",
       youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      date: "2024.01.14",
+      date: "2025.01.14",
       createdAt: new Date(),
     };
 
