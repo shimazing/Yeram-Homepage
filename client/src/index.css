@@ -23,8 +23,8 @@
   --destructive-foreground: hsl(210, 40%, 98%);
   --ring: hsl(221, 83%, 53%);
   --radius: 0.5rem;
-  
-  /* Church specific colors - Yerim Church Green Theme */
+
+  /* Church specific colors - Yeram Church Green Theme */
   --church-green: hsl(118, 41%, 45%);
   --church-dark-green: hsl(118, 41%, 25%);
   --church-light-green: hsl(118, 41%, 65%);

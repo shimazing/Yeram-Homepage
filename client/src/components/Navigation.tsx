@@ -34,7 +34,7 @@ export default function Navigation() {
             />
             <div>
               <h1 className="text-xl font-bold text-church-dark-green">예람교회</h1>
-              <p className="text-xs text-gray-500">Yerim Church</p>
+              <p className="text-xs text-gray-500">Yeram Church</p>
             </div>
           </Link>
 
