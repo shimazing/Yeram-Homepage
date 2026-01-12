@@ -7,7 +7,9 @@ import path from "path";
 import fs from "fs";
 
 // Configure multer for file uploads
-const uploadDir = path.join(process.cwd(), 'attached_assets');
+// Use /data/uploads for Railway Volume (persistent storage)
+// Use ./attached_assets for local development
+const uploadDir = process.env.UPLOAD_DIR || path.join(process.cwd(), 'attached_assets');
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDir)) {
