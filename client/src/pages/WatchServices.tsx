@@ -48,7 +48,9 @@ export default function WatchServices() {
 
   const getYouTubeThumbnail = (url: string) => {
     const videoId = extractVideoId(url);
-    return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : '';
+    // Use sddefault.jpg which is more reliable than maxresdefault.jpg
+    // sddefault.jpg is available for most videos and provides good quality (640x480)
+    return videoId ? `https://img.youtube.com/vi/${videoId}/sddefault.jpg` : '';
   };
 
   return (
