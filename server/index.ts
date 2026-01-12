@@ -7,8 +7,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static files from attached_assets folder
-app.use('/@assets', express.static(path.join(process.cwd(), 'attached_assets')));
+// Serve static files from upload directory
+// Use UPLOAD_DIR environment variable or default to attached_assets
+const uploadDir = process.env.UPLOAD_DIR || path.join(process.cwd(), 'attached_assets');
+app.use('/@assets', express.static(uploadDir));
 
 // Log all API requests for debugging
 app.use('/api', (req, res, next) => {
