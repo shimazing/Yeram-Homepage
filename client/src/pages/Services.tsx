@@ -56,7 +56,7 @@ export default function Services() {
     {
       title: "금요기도회",
       titleEn: "Friday Service",
-      time: "저녁 9:00",
+      time: "저녁 8:30",
       audience: "전 연령 대상",
       description: "말씀과 깊은 기도의 시간을 통해 하나님과 더 가까워집니다.",
       icon: Star,
