@@ -130,8 +130,8 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold text-church-dark-green mb-2">예배시간</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
-                주일 11시 / 오후 2시30분<br />
-                수요일 7시30분 / 금요일 9시
+                주일 오전 11시 / 오후 2시30분<br />
+                수요일 오후 7시30분 / 금요일 오후 8시30분
               </p>
             </CardContent>
           </Card>
