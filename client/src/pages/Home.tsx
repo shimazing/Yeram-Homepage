@@ -164,7 +164,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold text-church-dark-green mb-2">연락처</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
-                전화: 010-2653-2440 (담임목사 강용희) <br />
+                전화: 032)553-6041<br />
                 이메일: yerammethodistchurch@gmail.com
               </p>
             </CardContent>
