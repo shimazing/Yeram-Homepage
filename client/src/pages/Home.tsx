@@ -49,12 +49,17 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-church-dark-green mb-6 font-serif">
-            하나님 사랑 안에서<br />
-            <span className="text-church-accent-green">함께하는 예람교회</span>
+            예수사랑 예수사람 예수자랑<br />
+            <span className="text-church-accent-green"> 예수님과 동행하는 예람교회</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            "여호와는 나의 목자시니 내게 부족함이 없으리로다" (시편 23:1)<br />
-            예람교회에 오신 것을 환영합니다. 하나님의 말씀과 사랑으로 함께 성장해가요.
+            "내가 그리스도와 함께 십자가에 못 박혔나니<br />
+            그런 즉 이제는 내가 사는 것이 아니요<br />
+            오직 내 안에 그리스도께서 사시는 것이라<br />
+            이제 내가 육체 가운데 사는 것은<br />
+            나를 사랑하사 나를 위하여 자기 자신을 버리신<br />
+            하나님의 아들을 믿는 믿음 안에서 사는 것이라" (갈 2:20)<br />
+            예람교회에 오신 것을 환영합니다.
           </p>
         </div>
 
